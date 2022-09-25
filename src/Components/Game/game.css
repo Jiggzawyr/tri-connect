@@ -1,0 +1,128 @@
+.game {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+}
+
+.game-left {
+    float: left;
+    width: 25%;
+    font-size: 1.2rem;
+}
+
+.game-right {
+    float: right;
+    width: 25%;
+}
+
+.game-table {
+    width: 40%;
+    margin: 30px auto 30px auto;
+    border-collapse: collapse;
+    border-style: hidden;
+    background-color: #EEEEEE;
+}
+
+.game-table td {
+    width: 4%;
+    position:relative;
+    padding-top:0;
+    padding-bottom:0;
+    border: 5px solid #D89216;
+}
+
+@media only screen and (max-width: 600px) {
+    .game {
+        flex-direction: column;
+    }
+    .game-left {
+        float: center;
+        margin: auto;
+        width: 90%;
+    }
+    .game-right {
+        float: center;
+        margin: auto;
+        width: 90%;
+    }
+    .game-table {
+        width: 90%;
+        margin: 10px auto 10px auto;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .game-table td {
+        border: 3px solid #D89216;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .game-table td {
+        border: 2px solid #D89216;
+    }
+}
+
+.game-table td:after {
+    content: '';
+    display: block;
+    margin-top: 100%;
+  }
+
+.game-table td > div {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.piece {
+    max-height:100%; 
+    max-width:100%;
+}
+
+.btn{
+    width: 50%;
+    height: 60px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    color: #D89216;
+    border: 4px solid #D89216;
+    background-color: #EEEEEE;
+    margin: 20px auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .btn {
+        height: 50px;
+        font-size: 1.25rem;
+        border: 3.5px solid #D89216;
+        margin: 15px auto;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .btn {
+        height: 40px;
+        font-size: 1.3rem;
+        border: 3px solid #D89216;
+        margin: 5px auto;
+    }
+}
+
+.rolled-number {
+    padding-top: 15px;
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #D89216;
+}
+
+.light-background {
+    background-color: #EEEEEE !important;
+}
+
+.dark-background {
+    background-color: #191A19 !important;
+}

@@ -1,0 +1,28 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.play-button {
+    margin: auto;
+    width: 30%;
+    height: 60px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    color: #D89216;
+    border: 4px solid #D89216;
+}
+
+@media only screen and (max-width: 768px) {
+    .play-button {
+        width: 45%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .play-button {
+        width: 65%;
+    }
+}
