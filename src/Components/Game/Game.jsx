@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import './game.css';
-import backgroundMusic from '../../assets/sounds/background.mp3'
 import rollSound from '../../assets/sounds/roll.wav'
+import stompSound from '../../assets/sounds/stomp.wav'
 
 export default function Game({darkMode}) {
 
@@ -10,6 +10,10 @@ export default function Game({darkMode}) {
 
     const players = useMemo(() => {
       return ["blue", "green", "red"];
+    }, []);
+
+    const colors = useMemo(() => {
+      return ["#7FDBFF", "#2ECC40", "#FF4136"];
     }, []);
 
     const [ emptyPiece, setEmptyPiece ] = useState("white.png");
@@ -256,8 +260,16 @@ export default function Game({darkMode}) {
           return newBoard;
         })
  
-        setCnt((prevCnt) => (prevCnt + 1))
+        let audio = document.getElementById("stomp-sound");
+        audio.volume = 0.2;
+        if (audio.paused) {
+            audio.play();
+        }else{
+            audio.currentTime = 0
+        }
 
+        setCnt((prevCnt) => (prevCnt + 1))
+        
       }
 
       if(gamePhase===2){
@@ -308,6 +320,14 @@ export default function Game({darkMode}) {
             return newBoard;
           })
 
+          let audio = document.getElementById("stomp-sound");
+          audio.volume = 0.2;
+          if (audio.paused) {
+              audio.play();
+          }else{
+              audio.currentTime = 0
+          }
+
           setPieceSelected([]);
           setRolledNumber(0);
           setLog("");
@@ -326,14 +346,6 @@ export default function Game({darkMode}) {
       setLog("");
       setGamePhase(1);
       setValidMoves(true);
-
-      var audio = document.getElementById("background-music");
-      audio.volume = 0.5;
-      if (audio.paused) {
-        audio.play();
-      }else{
-          audio.currentTime = 0
-      }
     }
 
     const handleRollButtonOnClick = () => {
@@ -365,8 +377,8 @@ export default function Game({darkMode}) {
 
     return (
       <div>
-        <audio id="background-music" loop>
-          <source src={backgroundMusic} type="audio/mp3" />
+        <audio id="stomp-sound">
+          <source src={stompSound} type="audio/wav" />
         </audio>
         <audio id="roll-sound">
           <source src={rollSound} type="audio/wav" />
@@ -386,7 +398,7 @@ export default function Game({darkMode}) {
                       : '\u00A0'
                   }
                 </span>
-                <span style={{color: (gamePhase === 3) ? players[(cnt - 1) % 3]: players[cnt  % 3]}}>
+                <span style={{color: (gamePhase === 3) ? colors[(cnt - 1) % 3]: colors[cnt  % 3]}}>
                   { gamePhase === 3 
                     ? players[(cnt - 1) % 3].toUpperCase()
                     : gamePhase === 1 || gamePhase === 2 

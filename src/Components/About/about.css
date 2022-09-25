@@ -3,8 +3,32 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    width: 40%;
+    margin: auto;
 }
 
-p {
+.about p {
     margin: 2px;
+}
+
+.about hr {
+    width: 100%;
+    border: 1.5px solid #D89216;
+    margin: 40px auto 25px auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .about {
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .about {
+        width: 80%;
+    }
+    .about hr {
+        border: 1px solid #D89216;
+        margin: 30px auto 15px auto;
+    }
 }
