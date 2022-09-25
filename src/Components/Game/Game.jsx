@@ -351,7 +351,7 @@ export default function Game({darkMode}) {
       setValidMoves(validMovesPossible);
 
       if(validMovesPossible) setLog("");
-      else setLog("NO VALID MOVIE AVAILABLE");
+      else setLog("NO VALID MOVES AVAILABLE");
 
     }
 
