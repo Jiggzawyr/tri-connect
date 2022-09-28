@@ -83,7 +83,10 @@
     max-width:100%;
 }
 
-.btn{
+.piece { transition: all .2s ease-in-out; }
+.piece:hover { transform: scale(1.1); }
+
+.btn {
     width: 50%;
     height: 60px;
     border-radius: 8px;
@@ -92,6 +95,15 @@
     border: 4px solid #D89216;
     background-color: #EEEEEE;
     margin: 20px auto;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: gray;
+}
+
+.hide {
+    visibility: hidden;
 }
 
 @media only screen and (max-width: 768px) {
@@ -120,9 +132,9 @@
 }
 
 .light-background {
-    background-color: #EEEEEE !important;
+    background-color: #EEEEEE;
 }
 
 .dark-background {
-    background-color: #191A19 !important;
+    background-color: #191A19;
 }

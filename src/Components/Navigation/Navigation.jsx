@@ -37,9 +37,6 @@ export default function Navigation({darkModeChange, darkMode}) {
                         <a href="/game">Game</a>
                     </li>
                     <li>
-                        <a href="/rules">Rules</a>
-                    </li>
-                    <li>
                         <a href="/about">About</a>
                     </li>
                 </ul>

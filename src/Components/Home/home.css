@@ -15,14 +15,41 @@
     border: 4px solid #D89216;
 }
 
+.play-button:hover {
+    cursor: pointer;
+    background-color: gray;
+}
+
+.rules {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.rules-list {
+    margin: auto;
+    width: 50%;
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+    font-size: 1.2rem;
+}
+
 @media only screen and (max-width: 768px) {
     .play-button {
         width: 45%;
+    }
+    .rules-list {
+        width: 60%;
     }
 }
 
 @media only screen and (max-width: 600px) {
     .play-button {
         width: 65%;
+    }
+    .rules-list {
+        width: 80%;
     }
 }

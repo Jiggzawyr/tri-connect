@@ -1,12 +1,12 @@
 import React from "react";
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import './game.css';
 import rollSound from '../../assets/sounds/roll.wav'
 import stompSound from '../../assets/sounds/stomp.wav'
 
 export default function Game({darkMode}) {
 
-    const piecesImg = ["circle.png","square.png",'triangle.png'];
+    const piecesImg = ["circle.svg","square.svg",'triangle.svg'];
 
     const players = useMemo(() => {
       return ["blue", "green", "red"];
@@ -16,17 +16,9 @@ export default function Game({darkMode}) {
       return ["#7FDBFF", "#2ECC40", "#FF4136"];
     }, []);
 
-    const [ emptyPiece, setEmptyPiece ] = useState("white.png");
-    const [ validMove, setValidMove ] = useState("black.png");
-
-    useEffect( () => {
-      setEmptyPiece( darkMode ? "black.png" : "white.png" )
-      setValidMove( darkMode ? "white.png" : "black.png" )
-    }, [darkMode])
-
     const [board, setBoard] = useState(Array.from({length: 10},()=> Array.from({length: 10}, () => 0)));
 
-    const [gamePhase, setGamePhase] = useState(0);
+    const [gamePhase, setGamePhase] = useState(1);
 
     const [rolledNumber, setRolledNumber] = useState(0);
 
@@ -177,7 +169,7 @@ export default function Game({darkMode}) {
           if(board[i][j]===0) continue;
           let piece = board[i][j];
             //check all 8 directions
-            for(var k = 0; k < 8; k++){
+            for(let k = 0; k < 8; k++){
               let counter = 4;
               let r = i;
               let c = j;
@@ -241,14 +233,9 @@ export default function Game({darkMode}) {
 
     const handleCellOnCLick = (e) => {
 
-      if(gamePhase === 0) {
-        setLog("CLICK START BUTTON FIRST");
-        return;
-      }
-
-      var td = e.target.closest('td');
-      var row   = td.id.split("-")[1]
-      var col   = td.id.split("-")[2]
+      let td = e.target.closest('td');
+      let row   = td.id.split("-")[1]
+      let col   = td.id.split("-")[2]
 
       if(gamePhase===1){
         if(board[row][col]!==0) return;
@@ -356,8 +343,8 @@ export default function Game({darkMode}) {
 
       setRolledNumber(randomNumber);
 
-      var remainder = cnt % 3;
-      var player = remainder + 1;
+      let remainder = cnt % 3;
+      let player = remainder + 1;
 
       let validMovesPossible = checkForValidMoves(player, randomNumber, board)
       setValidMoves(validMovesPossible);
@@ -385,8 +372,9 @@ export default function Game({darkMode}) {
         </audio>
         <div className="game">
           <div className="game-left">
-            <button className={`btn ${darkMode ? "dark-background" : "light-background"}`}
-              onClick={e => handlePlayButtonOnClick()}>{gamePhase > 0 ? (gamePhase === 3 ? "Play again" : "Restart") : "Start"}
+            <button className={`btn ${darkMode ? "dark-background" : "light-background"} ${cnt===0 ? "hide" : "" }`}
+              onClick={e => handlePlayButtonOnClick()}>
+              {gamePhase === 3 ? "Play again" : "Restart"}
             </button>
             <div className="text-block">
               <div className="info">
@@ -412,19 +400,23 @@ export default function Game({darkMode}) {
               </div>
             </div>
           </div>
-          <table className={`game-table " ${darkMode ? "dark-background" : "light-background"}`}>
+          <table className={`game-table " ${darkMode ? "dark-background" : "light-background"} ${gamePhase === 3 ? "hide" : ""}`}>
             <tbody>
               {board.map((row, rowIndex) => {
                 return(
                   <tr key={"row"+rowIndex}>
                     {row.map((col, colIndex) => {
-                        let pieceSrc = "../images/" + emptyPiece;
-                        if(col!==0) pieceSrc = "../images/" + piecesImg[col-1];
-                        if(col===10) pieceSrc = "../images/" + validMove;
+                        let pieceSrc = "../images/";
+                        if(col!==0) pieceSrc += piecesImg[col-1];
                       return(
-                        <td key={"cell" + rowIndex + colIndex} id={"cell-" + rowIndex + "-" + colIndex}>
+                        <td key={"cell" + rowIndex + colIndex} 
+                            id={"cell-" + rowIndex + "-" + colIndex}
+                            className={`${col === 10 ? (darkMode ? "light-background" : "dark-background" ) : ""}`}>
                           <div className="cell-content" onClick={e => handleCellOnCLick(e)}>
-                          <img className="piece" src={pieceSrc} alt={pieceSrc.split(".")[0]}/>
+                            {col === 1 || col === 2 || col === 3 
+                            ? <img className="piece" src={pieceSrc} alt={pieceSrc.split(".")[0]}/>
+                            : <div></div>                            
+                            }
                           </div>
                         </td>
                       )

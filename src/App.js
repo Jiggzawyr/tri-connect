@@ -3,7 +3,6 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import About from './Components/About/About';
 import Game from './Components/Game/Game';
-import Rules from './Components/Rules/Rules';
 import Home from './Components/Home/Home';
 import NoPage from './Components/NoPage/NoPage';
 import Navigation from './Components/Navigation/Navigation';
@@ -31,7 +30,6 @@ function App() {
         <Routes>  
             <Route path="/" element={<Home darkMode={darkMode}/>} />
             <Route path="game" element={<Game darkMode={darkMode} />} />
-            <Route path="rules" element={<Rules />} />
             <Route path="about" element={<About />} />
             <Route path="*" element={<NoPage />} />
         </Routes> 
