@@ -6,7 +6,9 @@ import stompSound from '../../assets/sounds/stomp.wav'
 
 export default function Game({darkMode}) {
 
-    const piecesImg = ["circle.svg","square.svg",'triangle.svg'];
+    const piecesImg = useMemo(() => {
+      return ["circle.svg","square.svg",'triangle.svg'];
+    }, []);;
 
     const players = useMemo(() => {
       return ["blue", "green", "red"];
@@ -29,6 +31,14 @@ export default function Game({darkMode}) {
     const [cnt, setCnt] = useState(0);
 
     const [log, setLog] = useState("");
+
+    React.useEffect( () => {
+      piecesImg.forEach((image) => {
+        const newImage = new Image();
+        newImage.src = "../images/" + image;
+        window[image] = newImage;
+      });
+    }, [piecesImg])
 
     const deselectPiece = useCallback((board) => {
       for(let i = 0; i < 10; i++){
