@@ -368,6 +368,7 @@ export default function Game({darkMode}) {
       
       setRolledNumber(0);
       setValidMoves(true);
+      setLog("");
       setCnt((prevCnt) => (prevCnt + 1));
 
     }
